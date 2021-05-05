@@ -1,0 +1,75 @@
+$date
+  Sun Apr 25 16:31:51 2021
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$scope module standard $end
+$upscope $end
+$scope module std_logic_1164 $end
+$upscope $end
+$scope module mux_tb $end
+$var reg 4 ! i1[3:0] $end
+$var reg 4 " i2[3:0] $end
+$var reg 4 # i3[3:0] $end
+$var reg 4 $ i4[3:0] $end
+$var reg 4 % o[3:0] $end
+$var reg 2 & sel[1:0] $end
+$scope module testmux $end
+$var reg 4 ' in1[3:0] $end
+$var reg 4 ( in2[3:0] $end
+$var reg 4 ) in3[3:0] $end
+$var reg 4 * in4[3:0] $end
+$var reg 2 + sel[1:0] $end
+$var reg 4 , o[3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b0001 !
+b0010 "
+b0100 #
+b1000 $
+b0100 %
+b10 &
+b0001 '
+b0010 (
+b0100 )
+b1000 *
+b10 +
+b0100 ,
+#1000000
+b0001 %
+b00 &
+b00 +
+b0001 ,
+#2000000
+b0000 !
+b1010 "
+b1001 #
+b1110 $
+b1010 %
+b01 &
+b0000 '
+b1010 (
+b1001 )
+b1110 *
+b01 +
+b1010 ,
+#3000000
+b0111 !
+b1000 "
+b1111 #
+b1001 $
+b1001 %
+b11 &
+b0111 '
+b1000 (
+b1111 )
+b1001 *
+b11 +
+b1001 ,
+#4000000

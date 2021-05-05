@@ -1,0 +1,7 @@
+v 4
+file . "shift_reg_8bit_tb.vhdl" "6c815a63171bc14f605da57ecb0409a01b124938" "20210425234907.560":
+  entity shift_reg_8bit_tb at 1( 0) + 0 on 13;
+  architecture behav of shift_reg_8bit_tb at 8( 133) + 0 on 14;
+file . "shift_reg_8bit.vhdl" "c17b45e871b1f91e6b72ece60c494f4da398fc2e" "20210425234907.535":
+  entity shift_reg_8bit at 1( 0) + 0 on 11;
+  architecture behav of shift_reg_8bit at 16( 649) + 0 on 12;
