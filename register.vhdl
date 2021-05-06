@@ -1,18 +1,18 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity register is
+entity reg is
 port(	I:	in std_logic_vector (7 downto 0);
 		clk:	in std_logic;
 		O:	out std_logic_vector(7 downto 0)
 );
-end register;
+end reg;
 
-architecture behav of register is
+architecture behav of reg is
 begin
 process(clk) is
 begin
-	if(clk='1' and clk'event) then:
+	if(clk='1' and clk'event) then
 		O <= I;
 	end if;
 end process;

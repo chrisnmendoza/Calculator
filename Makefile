@@ -1,4 +1,5 @@
-registerFile: registerFile.vhdl registerFile_tb.vhdl
+registerFile: registerFile.vhdl registerFile_tb.vhdl register.vhdl
+	ghdl -a register.vhdl
 	ghdl -a registerFile.vhdl
 	ghdl -a registerFile_tb.vhdl
 	ghdl -e registerFile_tb
