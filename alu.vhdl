@@ -19,7 +19,7 @@ begin
 	if(op = "00") then
         O <= std_logic_vector(signed(A) + signed(B));
     elsif(op = "01") then
-        O <= std_logic_vector(signed(A) - signed(B));
+        O <= std_logic_vector(signed(A) + signed(not B) + 1);
     elsif(op = "10") then
 
     else

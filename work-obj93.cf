@@ -1,19 +1,19 @@
 v 4
-file . "register.vhdl" "ff68d8800e97015df02294b603e1314a4886f14f" "20210507144606.816":
-  entity reg at 1( 0) + 0 on 571;
-  architecture behav of reg at 11( 211) + 0 on 572;
-file . "alu.vhdl" "85f50250d85b7db14fc00bf669b9f4234cfaefdb" "20210506183603.916":
-  entity alu at 1( 0) + 0 on 11;
-  architecture behav of alu at 14( 362) + 0 on 12;
-file . "alu_tb.vhdl" "d68140947f1d940d62f53aecdd849cbb3b5e4fa6" "20210506183603.954":
-  entity alu_tb at 1( 0) + 0 on 13;
-  architecture behav of alu_tb at 8( 111) + 0 on 14;
-file . "registerFile.vhdl" "b098fdc4cee8dd8b4ed450feffec1cdc808ba2b5" "20210507144606.833":
-  entity registerfile at 1( 0) + 0 on 573;
-  architecture behav of registerfile at 17( 819) + 0 on 574;
-file . "registerFile_tb.vhdl" "d00d250bdd6c25631f3da4d2258af63370527226" "20210507144606.850":
-  entity registerfile_tb at 1( 0) + 0 on 575;
-  architecture behav of registerfile_tb at 8( 129) + 0 on 576;
 file . "register_tb.vhdl" "f962221f13e5841d5e382baeda7c7d51283bb9a2" "20210506193656.361":
   entity reg_tb at 1( 0) + 0 on 147;
   architecture behav of reg_tb at 8( 111) + 0 on 148;
+file . "registerFile_tb.vhdl" "d00d250bdd6c25631f3da4d2258af63370527226" "20210507144650.421":
+  entity registerfile_tb at 1( 0) + 0 on 581;
+  architecture behav of registerfile_tb at 8( 129) + 0 on 582;
+file . "registerFile.vhdl" "b098fdc4cee8dd8b4ed450feffec1cdc808ba2b5" "20210507144650.404":
+  entity registerfile at 1( 0) + 0 on 579;
+  architecture behav of registerfile at 17( 819) + 0 on 580;
+file . "alu_tb.vhdl" "d68140947f1d940d62f53aecdd849cbb3b5e4fa6" "20210507194606.575":
+  entity alu_tb at 1( 0) + 0 on 605;
+  architecture behav of alu_tb at 8( 111) + 0 on 606;
+file . "alu.vhdl" "fb049f403673fa0777d68d854dc5c1787a8566eb" "20210507194606.555":
+  entity alu at 1( 0) + 0 on 603;
+  architecture behav of alu at 14( 362) + 0 on 604;
+file . "register.vhdl" "ff68d8800e97015df02294b603e1314a4886f14f" "20210507144650.385":
+  entity reg at 1( 0) + 0 on 577;
+  architecture behav of reg at 11( 211) + 0 on 578;
