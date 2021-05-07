@@ -62,19 +62,37 @@ begin
 
 end process;
 
-WITH rs1 SELECT
-rd1 <=
-    o1 WHEN "00",
-    o2 WHEN "01",
-    o3 WHEN "10",
-    o4 WHEN OTHERS;
+process(stabilizedWrite) is
+begin
+    if(clk='1') then
+        if(rs1="00") then --rd1 should output register 1 
+        rd1 <= o1; 
 
-WITH rs2 SELECT
-rd2 <=
-    o1 WHEN "00",
-    o2 WHEN "01",
-    o3 WHEN "10",
-    o4 WHEN OTHERS;
+        elsif(rs1="01") then --rd1 should output register 2 
+        rd1 <= o2; 
+        
+        elsif(rs1="10") then --rd1 should output register 3 
+        rd1 <= o3; 
+        
+        else --rd1 should output register 1 
+        rd1 <= o4; 
+        
+        end if; 
+        if(rs2="00") then --rd2 should output register 1 
+        rd2 <= o1; 
+
+        elsif(rs2="01") then --rd2 should output register 2 
+        rd2 <= o2; 
+        
+        elsif(rs2="10") then --rd2 should output register 3 
+        rd2 <= o3; 
+        
+        else --rd2 should output register 1 
+        rd2 <= o4; 
+        end if;
+    end if;
+end process;
+
 
 
 end behav;
