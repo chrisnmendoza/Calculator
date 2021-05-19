@@ -43,7 +43,7 @@ constant patterns : pattern_array := -- Order goes: Input address rs1,rs2,ws ; i
 ("00", "01", "00", "00000001","00000000","11111111",'0', '1'), --clock enable = 0, won't write to register
 ("00", "01", "00", "00000001","00000000","00000000",'0', '0'), --test nothing happens on clock falling edge
 ("10", "00", "10", "11111111","00000001","11111111",'1', '1'), --change what registers are at rs1 and rs2 and simultaneously change what's at rs1
-("00", "01", "00", "11111111","00000001","00000000",'0', '0'), --test nothing happens on clock falling edge HOWEVER YOU ARE ABLE TO CHANGE WHAT RD AND RS IS
+("00", "01", "00", "00000001","00000000","00000000",'0', '0'), --test nothing happens on clock falling edge HOWEVER YOU ARE ABLE TO CHANGE WHAT RD AND RS IS
 ("00", "01", "00", "00001001","00000000","00001001",'1', '1'), --ws selects register1 and writes 00000001 to it
 ("00", "01", "00", "00001001","00000000","00001001",'0', '1')); --clock enable = 0, won't write to register
 begin

@@ -1,19 +1,19 @@
 v 4
-file . "register_tb.vhdl" "f962221f13e5841d5e382baeda7c7d51283bb9a2" "20210506193656.361":
-  entity reg_tb at 1( 0) + 0 on 147;
-  architecture behav of reg_tb at 8( 111) + 0 on 148;
-file . "registerFile_tb.vhdl" "d00d250bdd6c25631f3da4d2258af63370527226" "20210507144650.421":
-  entity registerfile_tb at 1( 0) + 0 on 581;
-  architecture behav of registerfile_tb at 8( 129) + 0 on 582;
-file . "registerFile.vhdl" "b098fdc4cee8dd8b4ed450feffec1cdc808ba2b5" "20210507144650.404":
-  entity registerfile at 1( 0) + 0 on 579;
-  architecture behav of registerfile at 17( 819) + 0 on 580;
-file . "alu_tb.vhdl" "cbb55747345441d92f8103d5948d80c6deb5719a" "20210509165646.197":
-  entity alu_tb at 1( 0) + 0 on 857;
-  architecture behav of alu_tb at 8( 111) + 0 on 858;
-file . "alu.vhdl" "6caa635ed1768b59c023b90c825272c525b36830" "20210509165646.180":
-  entity alu at 1( 0) + 0 on 855;
-  architecture behav of alu at 14( 371) + 0 on 856;
-file . "register.vhdl" "ff68d8800e97015df02294b603e1314a4886f14f" "20210507144650.385":
-  entity reg at 1( 0) + 0 on 577;
-  architecture behav of reg at 11( 211) + 0 on 578;
+file . "register_tb.vhdl" "f962221f13e5841d5e382baeda7c7d51283bb9a2" "20210510020405.248":
+  entity reg_tb at 1( 0) + 0 on 881;
+  architecture behav of reg_tb at 8( 111) + 0 on 882;
+file . "registerFile_tb.vhdl" "ad2489cb5b43e513a17ffc00dfb361179ad3218f" "20210511023704.313":
+  entity registerfile_tb at 1( 0) + 0 on 933;
+  architecture behav of registerfile_tb at 8( 129) + 0 on 934;
+file . "registerFile.vhdl" "0498762838cbe7d67ab03c959da8b9a673a8b2d2" "20210511023704.296":
+  entity registerfile at 1( 0) + 0 on 931;
+  architecture behav of registerfile at 17( 819) + 0 on 932;
+file . "alu_tb.vhdl" "cbb55747345441d92f8103d5948d80c6deb5719a" "20210510020409.739":
+  entity alu_tb at 1( 0) + 0 on 891;
+  architecture behav of alu_tb at 8( 111) + 0 on 892;
+file . "alu.vhdl" "466c9cb70de9b926e1e2b45e4d1e145d28276cdb" "20210510020409.706":
+  entity alu at 1( 0) + 0 on 889;
+  architecture behav of alu at 14( 371) + 0 on 890;
+file . "register.vhdl" "ff68d8800e97015df02294b603e1314a4886f14f" "20210511023704.278":
+  entity reg at 1( 0) + 0 on 929;
+  architecture behav of reg at 11( 211) + 0 on 930;

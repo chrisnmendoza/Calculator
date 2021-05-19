@@ -60,38 +60,17 @@ begin
 
 end process;
 
-process(o1, o2, o3, o4) is
-begin
-    if(clk='1') then
-        if(rs1="00") then --rd1 should output register 1 
-        rd1 <= o1; 
+with rs1 select --combinational read of rs1
+    rd1 <= o1 when "00",
+           o2 when "01",
+           o3 when "10",
+           o4 when others;
 
-        elsif(rs1="01") then --rd1 should output register 2 
-        rd1 <= o2; 
-        
-        elsif(rs1="10") then --rd1 should output register 3 
-        rd1 <= o3; 
-        
-        else --rd1 should output register 1 
-        rd1 <= o4; 
-        
-        end if; 
-        if(rs2="00") then --rd2 should output register 1 
-        rd2 <= o1; 
-
-        elsif(rs2="01") then --rd2 should output register 2 
-        rd2 <= o2; 
-        
-        elsif(rs2="10") then --rd2 should output register 3 
-        rd2 <= o3; 
-        
-        else --rd2 should output register 1 
-        rd2 <= o4; 
-        end if;
-    end if;
-end process;
-
-
+with rs2 select --combinational read of rs2
+    rd2 <= o1 when "00",
+           o2 when "01",
+           o3 when "10",
+           o4 when others;
 
 end behav;
 

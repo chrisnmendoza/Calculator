@@ -25,11 +25,9 @@ begin
         sum <= std_logic_vector(signed(A) + signed(B));
         O <= sum;
     elsif(temp = "01") then
-        sum <= std_logic_vector(signed(A) + signed(not B) + 1);
+        sum <= std_logic_vector(signed(A) + signed(not B) + 1); --two's complement subtraction
         O <= sum;
     elsif(temp = "10") then
-       --O <= oPrev;
-       --O <= A;
     else
         if(A = B) then
             EQ <= '1';
