@@ -8,8 +8,8 @@ port(	rs1:	in std_logic_vector (1 downto 0); -- for loading addresses: 00 = regi
         ws:        in std_logic_vector(1 downto 0); -- write selects address: 00 = register 1, 01 = register 2, 10 = register 3, 11 = register 4
 		wd:		in std_logic_vector(7 downto 0); -- write data
         we:		in std_logic; -- positive level triggering in problem 3
-		rd1:		out std_logic_vector (7 downto 0) := "00000001"; -- 0: don't do anything; 1: shift_reg is enabled
-        rd2:		out std_logic_vector (7 downto 0) := "00000001" -- 0: don't do anything; 1: shift_reg is enabled
+		rd1:		out std_logic_vector (7 downto 0) := "00000000"; -- 0: don't do anything; 1: shift_reg is enabled
+        rd2:		out std_logic_vector (7 downto 0) := "00000000" -- 0: don't do anything; 1: shift_reg is enabled
 );
 end registerFile;
 
@@ -17,20 +17,20 @@ end registerFile;
 architecture behav of registerFile is
 
 component reg
-port (	I:	in std_logic_vector (7 downto 0) := "00000001";
+port (	I:	in std_logic_vector (7 downto 0) := "00000000";
         clk:    in std_logic; 
-        O:	out std_logic_vector(7 downto 0) := "00000001"
+        O:	out std_logic_vector(7 downto 0) := "00000000"
 );
 end component;
 
-signal i1: std_logic_vector(7 downto 0) := "00000001";
-signal i2: std_logic_vector(7 downto 0) := "00000001";
-signal i3: std_logic_vector(7 downto 0) := "00000001";
-signal i4: std_logic_vector(7 downto 0) := "00000001";
-signal o1: std_logic_vector(7 downto 0) := "00000001";
-signal o2: std_logic_vector(7 downto 0) := "00000001";
-signal o3: std_logic_vector(7 downto 0) := "00000001";
-signal o4: std_logic_vector(7 downto 0) := "00000001";
+signal i1: std_logic_vector(7 downto 0) := "00000000";
+signal i2: std_logic_vector(7 downto 0) := "00000000";
+signal i3: std_logic_vector(7 downto 0) := "00000000";
+signal i4: std_logic_vector(7 downto 0) := "00000000";
+signal o1: std_logic_vector(7 downto 0) := "00000000";
+signal o2: std_logic_vector(7 downto 0) := "00000000";
+signal o3: std_logic_vector(7 downto 0) := "00000000";
+signal o4: std_logic_vector(7 downto 0) := "00000000";
 signal clockSig: std_logic;
 begin
 
