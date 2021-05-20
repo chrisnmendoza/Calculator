@@ -2,18 +2,24 @@ v 4
 file . "register_tb.vhdl" "f962221f13e5841d5e382baeda7c7d51283bb9a2" "20210510020405.248":
   entity reg_tb at 1( 0) + 0 on 881;
   architecture behav of reg_tb at 8( 111) + 0 on 882;
-file . "registerFile_tb.vhdl" "ad2489cb5b43e513a17ffc00dfb361179ad3218f" "20210511023704.313":
-  entity registerfile_tb at 1( 0) + 0 on 933;
-  architecture behav of registerfile_tb at 8( 129) + 0 on 934;
-file . "registerFile.vhdl" "0498762838cbe7d67ab03c959da8b9a673a8b2d2" "20210511023704.296":
-  entity registerfile at 1( 0) + 0 on 931;
-  architecture behav of registerfile at 17( 819) + 0 on 932;
+file . "registerFile_tb.vhdl" "ad2489cb5b43e513a17ffc00dfb361179ad3218f" "20210519200422.148":
+  entity registerfile_tb at 1( 0) + 0 on 965;
+  architecture behav of registerfile_tb at 8( 129) + 0 on 966;
+file . "registerFile.vhdl" "7bc2f1b04df2dd9a71a61a1ccadab0736784f688" "20210519200422.130":
+  entity registerfile at 1( 0) + 0 on 963;
+  architecture behav of registerfile at 17( 819) + 0 on 964;
 file . "alu_tb.vhdl" "cbb55747345441d92f8103d5948d80c6deb5719a" "20210510020409.739":
   entity alu_tb at 1( 0) + 0 on 891;
   architecture behav of alu_tb at 8( 111) + 0 on 892;
 file . "alu.vhdl" "466c9cb70de9b926e1e2b45e4d1e145d28276cdb" "20210510020409.706":
   entity alu at 1( 0) + 0 on 889;
   architecture behav of alu at 14( 371) + 0 on 890;
-file . "register.vhdl" "ff68d8800e97015df02294b603e1314a4886f14f" "20210511023704.278":
-  entity reg at 1( 0) + 0 on 929;
-  architecture behav of reg at 11( 211) + 0 on 930;
+file . "register.vhdl" "fc42142fff12ad7b0c51b25589d222651edca8ef" "20210519200422.112":
+  entity reg at 1( 0) + 0 on 961;
+  architecture behav of reg at 11( 211) + 0 on 962;
+file . "calculator.vhdl" "5c028ca967515a8b05e244a81257b6b3ca14e929" "20210519201043.093":
+  entity calculator at 1( 0) + 0 on 979;
+  architecture behavioral of calculator at 13( 413) + 0 on 980;
+file . "calculator_tb.vhdl" "d31803192d9f3eb9db919849bfb61b101b39c9fc" "20210519201043.117":
+  entity calculator_tb at 1( 0) + 0 on 981;
+  architecture behav of calculator_tb at 8( 125) + 0 on 982;

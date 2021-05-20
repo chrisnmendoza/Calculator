@@ -1,0 +1,143 @@
+$date
+  Wed May 19 16:04:35 2021
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$scope module standard $end
+$upscope $end
+$scope module std_logic_1164 $end
+$upscope $end
+$scope module numeric_std $end
+$upscope $end
+$scope module calculator_tb $end
+$var reg 8 ! i[7:0] $end
+$var reg 1 " clock $end
+$var reg 8 # tempout[7:0] $end
+$scope module calculator1 $end
+$var reg 8 $ i[7:0] $end
+$var reg 1 % clk $end
+$var reg 8 & tempoutput[7:0] $end
+$var reg 8 ' regout1[7:0] $end
+$var reg 8 ( regout2[7:0] $end
+$var reg 8 ) regwrite[7:0] $end
+$var reg 1 * branch $end
+$var reg 1 + we_signal $end
+$var reg 2 , regin1[1:0] $end
+$var reg 2 - regin2[1:0] $end
+$var reg 2 . ws_signal[1:0] $end
+$scope module regfile $end
+$var reg 2 / rs1[1:0] $end
+$var reg 2 0 rs2[1:0] $end
+$var reg 1 1 clk $end
+$var reg 2 2 ws[1:0] $end
+$var reg 8 3 wd[7:0] $end
+$var reg 1 4 we $end
+$var reg 8 5 rd1[7:0] $end
+$var reg 8 6 rd2[7:0] $end
+$var reg 8 7 i1[7:0] $end
+$var reg 8 8 i2[7:0] $end
+$var reg 8 9 i3[7:0] $end
+$var reg 8 : i4[7:0] $end
+$var reg 8 ; o1[7:0] $end
+$var reg 8 < o2[7:0] $end
+$var reg 8 = o3[7:0] $end
+$var reg 8 > o4[7:0] $end
+$var reg 1 ? clocksig $end
+$scope module reg_1 $end
+$var reg 8 @ i[7:0] $end
+$var reg 1 A clk $end
+$var reg 8 B o[7:0] $end
+$upscope $end
+$scope module reg_2 $end
+$var reg 8 C i[7:0] $end
+$var reg 1 D clk $end
+$var reg 8 E o[7:0] $end
+$upscope $end
+$scope module reg_3 $end
+$var reg 8 F i[7:0] $end
+$var reg 1 G clk $end
+$var reg 8 H o[7:0] $end
+$upscope $end
+$scope module reg_4 $end
+$var reg 8 I i[7:0] $end
+$var reg 1 J clk $end
+$var reg 8 K o[7:0] $end
+$upscope $end
+$upscope $end
+$scope module alu1 $end
+$var reg 8 L a[7:0] $end
+$var reg 8 M b[7:0] $end
+$var reg 2 N opfield[1:0] $end
+$var reg 8 O o[7:0] $end
+$var reg 1 P eq $end
+$var reg 2 Q temp[1:0] $end
+$var reg 8 R sum[7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b00000000 !
+0"
+bUUUUUUUU #
+b00000000 $
+0%
+b00000010 &
+b00000001 '
+b00000001 (
+b00000010 )
+0*
+U+
+bUU ,
+bUU -
+bUU .
+b00 /
+b00 0
+01
+b00 2
+b00000010 3
+U4
+b00000001 5
+b00000001 6
+b00000001 7
+b00000001 8
+b00000001 9
+b00000001 :
+b00000001 ;
+b00000001 <
+b00000001 =
+b00000001 >
+0?
+b00000001 @
+0A
+b00000001 B
+b00000001 C
+0D
+b00000001 E
+b00000001 F
+0G
+b00000001 H
+b00000001 I
+0J
+b00000001 K
+b00000001 L
+b00000001 M
+b00 N
+b00000010 O
+0P
+b00 Q
+b00000010 R
+#1000000
+1"
+1%
+11
+1?
+1A
+1D
+1G
+1J
+#2000000
