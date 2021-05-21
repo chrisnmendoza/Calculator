@@ -29,7 +29,8 @@ end record;
 --  The patterns to apply.
 type pattern_array is array (natural range <>) of pattern_type;
 constant patterns : pattern_array := -- Order goes: Input address rs1,rs2,ws ; input data rd1,rd2,wd ; we clk
-(
+(("00000000", '1'), --add r1 and r1 to r1 (0000 + 0000 = 0000)
+("00000000", '0'),
 ("01000010", '1'), --set r1 to 0010
 ("01000111", '0'),
 ("00000000", '1'), --add r1 and r1 to r1 (0010 + 0010 = 0100)
