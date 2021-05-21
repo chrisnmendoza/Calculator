@@ -32,7 +32,7 @@ constant patterns : pattern_array := -- Order goes: Input address rs1,rs2,ws ; i
 (
 ("01000010", '1'), --set r1 to 0010
 ("01000111", '0'),
-("00000001", '1'), --add r1 and r1 to r1 (0010 + 0010 = 0100)
+("00000000", '1'), --add r1 and r1 to r1 (0010 + 0010 = 0100)
 ("00000000", '0'),
 ("01011010", '1'), --set r2 to 1010
 ("01001000", '0'),

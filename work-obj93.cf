@@ -1,10 +1,10 @@
 v 4
-file . "calculator_tb.vhdl" "3cf0a9271371a031ad39c6011a8858f9ae02caa4" "20210521182615.675":
-  entity calculator_tb at 1( 0) + 0 on 1627;
-  architecture behav of calculator_tb at 8( 125) + 0 on 1628;
-file . "calculator.vhdl" "e567de5b8e9eeb55c2aee0c7bbefc06db00ea608" "20210521182615.658":
-  entity calculator at 1( 0) + 0 on 1625;
-  architecture behavioral of calculator at 12( 481) + 0 on 1626;
+file . "calculator_tb.vhdl" "20867a7f86593cec7ed5ce4338a788c2ec076997" "20210521182712.138":
+  entity calculator_tb at 1( 0) + 0 on 1631;
+  architecture behav of calculator_tb at 8( 125) + 0 on 1632;
+file . "calculator.vhdl" "e567de5b8e9eeb55c2aee0c7bbefc06db00ea608" "20210521182712.121":
+  entity calculator at 1( 0) + 0 on 1629;
+  architecture behavioral of calculator at 12( 481) + 0 on 1630;
 file . "register.vhdl" "ff68d8800e97015df02294b603e1314a4886f14f" "20210520195705.825":
   entity reg at 1( 0) + 0 on 1205;
   architecture behav of reg at 11( 211) + 0 on 1206;
