@@ -45,15 +45,16 @@ signal writeEnable : std_logic;
 signal regFileOutputA, regFileOutputB: std_logic_vector(7 downto 0);
 signal aluInputA, aluInputB: std_logic_vector(7 downto 0);
 signal aluOpField: std_logic_vector(1 downto 0);
-signal aluOutput : std_logic_vector(7 downto 0);
+signal aluOutput, aluOutputBuffer : std_logic_vector(7 downto 0);
 signal aluBranch: std_logic;
 signal rType : std_logic; --signifies whether it is add/subtract (1) or load (0)
 signal immExtend : std_logic_vector(7 downto 0); --immedate 0 or 1 padded
-signal clk_signal, clk_signal2, clk_signal3 : std_logic;
+signal clk_signal, clk_signal2, clk_signal3, clk_signal4, clk_signal5, clk_signal6, clk_signal7, clk_signal8, clk_signal9 : std_logic;
+signal opCodeAndClk: std_logic_vector(2 downto 0);
 
 --signal ws_signal : std_logic_vector (1 downto 0) := "00";
 begin  
-    regFile : registerFile port map(rs1 => regFileInputA, rs2 => regFileInputB, clk => clk_signal3, ws => regDest, wd=>regWrite, we => writeEnable,rd1 =>regFileOutputA, rd2 =>regFileOutputB  );
+    regFile : registerFile port map(rs1 => regFileInputA, rs2 => regFileInputB, clk => clk_signal9, ws => regDest, wd=>regWrite, we => writeEnable,rd1 =>regFileOutputA, rd2 =>regFileOutputB  );
     alu1: alu port map(A => aluInputA, B => aluInputB, opField => aluOpField, O => aluOutput, EQ => aluBranch);
 
     with I(7 downto 6) select 
@@ -67,10 +68,13 @@ begin
     
     regFileInputA <= I(5 downto 4);
 
+
+
     with rType select
         regFileInputB <= I(3 downto 2) when '1', --add/sub format
                          I(5 downto 4) when others; --just to have an expected return value, the registerFile will select rd as its A and B input on load
 
+--right now the aluoutput defaults to "0000000" because that's how it should be, we need a way to change regWrite to wait for aluOutput to stabilize before sending it in
     with rType select
         regWrite <= aluOutput when '1', --add/sub gets regWrite from alu
                     immExtend when others;
@@ -84,12 +88,13 @@ begin
     aluInputA <= regFileOutputA;
     aluInputB <= regFileOutputB;
 
-    with I(7 downto 6) select --right now ignores clock
-        writeEnable <= '1' when "00",
-                       '1' when "11",
-                       '1' when "01",
+    with opCodeAndClk select --right now ignores clock
+        writeEnable <= '1' when "001",
+                       '1' when "111",
+                       '1' when "011",
                        '0' when others;
     
+    opCodeAndClk <= I(7 downto 6) & clk;
     
 
 
@@ -99,18 +104,56 @@ begin
     process(clk)
     begin
         clk_signal <= clk;
+
     end process;
 
     process(clk_signal)
     begin
+
         clk_signal2 <= clk_signal;
     end process;
 
     process(clk_signal2)
     begin
         clk_signal3 <= clk_signal2;
-        report "regWrite: " & integer'image(to_integer(signed(RegWrite))); 
     end process;
 
+    process(clk_signal3)
+    begin
+        
+        clk_signal4 <= clk_signal3;
+    end process;
+
+    process(clk_signal4)
+    begin
+
+        clk_signal5 <= clk_signal4;
+    end process;
+
+    process(clk_signal5)
+    begin
+        clk_signal6 <= clk_signal5;
+    end process;
+
+    process(clk_signal6)
+    begin
+        
+        clk_signal7 <= clk_signal6;
+    end process;
+
+    process(clk_signal7)
+    begin
+
+        clk_signal8 <= clk_signal7;
+
+    end process;
+
+    process(clk_signal8)
+    begin
+        
+        clk_signal9 <= clk_signal8;
+        report "regWrite: " & integer'image(to_integer(signed(RegWrite))); 
+
+    end process;
 
 end architecture behavioral;
