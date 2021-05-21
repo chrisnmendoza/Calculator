@@ -30,13 +30,14 @@ end record;
 type pattern_array is array (natural range <>) of pattern_type;
 constant patterns : pattern_array := -- Order goes: Input address rs1,rs2,ws ; input data rd1,rd2,wd ; we clk
 (("00000000", '0'),
-("01010111", '1'),
-("00000000", '0'),
-("01001000", '1'),
-("00000000", '0'),
-("00000110", '1'),
-("00000000", '0'),
-("01000000", '1')); --clock enable = 0, won't write to register
+("01000111", '1'), --set r1 to 0111
+("01010001", '0'),
+("01011010", '1'), --set r2 to 1010
+("01001000", '0'),
+("01100001", '1'), --set r3 to 0001
+("01000011", '0'),
+("01110101", '1'), --set r4 to 0101
+("01101011", '0')); --clock enable = 0, won't write to register
 begin
 --  Check each pattern.
 for n in patterns'range loop

@@ -37,29 +37,43 @@ signal regIn1, regIn2, ws_signal :std_logic_vector(1 downto 0);
 signal aluOutput : std_logic_vector(7 downto 0) := "00000000";
 signal rType : std_logic := '0'; --signifies whether it is add/subtract (1) or load (0)
 signal immediateOutput : std_logic_vector(7 downto 0) := "00000000";
+signal clk_signal : std_logic;
 --signal ws_signal : std_logic_vector (1 downto 0) := "00";
 begin  
-    regFile : registerFile port map(rs1 => I(5 downto 4), rs2 => I(3 downto 2), clk => clk, ws => ws_signal, wd=>regWrite, we => we_signal,rd1 =>regOut1, rd2 =>regOut2  );
+    regFile : registerFile port map(rs1 => I(5 downto 4), rs2 => I(3 downto 2), clk => clk_signal, ws => ws_signal, wd=>regWrite, we => we_signal,rd1 =>regOut1, rd2 =>regOut2  );
     alu1: alu port map(A => regOut1, B => regOut2, opField => I(7 downto 6), O => aluOutput, EQ => branch);
     we_signal <= (I(7) and I(6)) or (not I(7) and not I(6)) or (not I(7) and I(6)); --write enable for when add, sub, or load is called
     rType <= (I(7) and I(6)) or (not I(7) and not I(6)); --add or subtract makes it 1
-    immediateOutput(3 downto 0) <= I(3 downto 0);
-    with I(3) select immediateOutput(7 downto 4) <=
-        "0000" when '0',
-        "1111" when others;
-    with rType select regWrite <=
-        aluOutput when '1',
-        immediateOutput when others;
-    with rType select ws_signal <=
-        I(5 downto 4) when '0',
-        I(1 downto 0) when others;
+    --immediateOutput(3 downto 0) <= I(3 downto 0);
+    with I(3) select immediateOutput(7 downto 0) <=
+        "0000" & I(3 downto 0) when '0',
+        "1111" & I(3 downto 0) when others;
 
         --PUT LOAD IN A PROCESS STATEMENT
     
     process(clk)
     begin
-        report "Reg Output Value of ALU: " & integer'image(to_integer(signed(RegWrite)));
+        if(rType = '1') then
+            regWrite <= aluOutput;
+        else
+            regWrite <= immediateOutput;
+        end if;
+        if(clk = '1') then
+            if(rType = '0') then --load
+                ws_signal <= I(5 downto 4);
+                report "calling load selecting register with address: " & integer'image(to_integer(1 + unsigned("0" & I(5 downto 4))));
+                report "RegWrite value: " & integer'image(to_integer(signed(RegWrite)));
+            else --add/sub
+                ws_signal <= I(1 downto 0);
+                report "calling add or subtract selecting register with address: " & integer'image(to_integer(1 + unsigned("0" & I(1 downto 0))));
+                report "RegWrite value: " & integer'image(to_integer(signed(RegWrite)));
+            end if;
+        end if;
+        
+        --report "regOut1 value: " & integer'image(to_integer(signed(regOut1)));
+        --report "regOut2 value: " & integer'image(to_integer(signed(regOut2)));
         --report "Reg Output Value of we_signal " & std_logic'image(we_signal);
+        clk_signal <= clk;
     end process;
 
 
