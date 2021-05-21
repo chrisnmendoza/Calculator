@@ -4,8 +4,8 @@ use IEEE.numeric_std.all;
 
 entity calculator is 
     port( --opcode key: ADD = 00, SUB = 11, LOAD = 01, CMP/PRINT = 10
-        I: in std_logic_vector(7 downto 0) := "00000000"; --format is: opcode (7 downto 6), rd (5 downto 4), rs (3 downto 2), rt (1 downto 0)
-        clk: in std_logic
+        I: in std_logic_vector(7 downto 0) := "00000000"; --format is: opcode (7 downto 6), rs (5 downto 4), rt (3 downto 2), rd (1 downto 0) for rType, 
+        clk: in std_logic                                 --opcode(7 downto 6), rd(5 downto 4), im (3 downto 0) for I-type
     );
 end entity calculator;
 
@@ -31,46 +31,86 @@ component registerFile is
 );
 end component registerFile;
 
-signal regOut1, regOut2, regOut3, regOut4, RegWrite : std_logic_vector(7 downto 0);
-signal branch, we_signal : std_logic :='0'; --write enable = 1 for all except branch/compare
+signal regOut1, regOut2, regOut3, regOut4: std_logic_vector(7 downto 0);
+signal we_signal : std_logic :='0'; --write enable = 1 for all except branch/compare
 signal regIn1, regIn2, ws_signal :std_logic_vector(1 downto 0);
-signal aluOutput : std_logic_vector(7 downto 0) := "00000000";
-signal rType : std_logic := '0'; --signifies whether it is add/subtract (1) or load (0)
+
+
 signal immediateOutput : std_logic_vector(7 downto 0) := "00000000";
-signal clk_signal : std_logic;
+
+
+signal regFileInputA, regFileInputB, regDest: std_logic_vector(1 downto 0);
+signal regWrite : std_logic_vector(7 downto 0);
+signal writeEnable : std_logic;
+signal regFileOutputA, regFileOutputB: std_logic_vector(7 downto 0);
+signal aluInputA, aluInputB: std_logic_vector(7 downto 0);
+signal aluOpField: std_logic_vector(1 downto 0);
+signal aluOutput : std_logic_vector(7 downto 0);
+signal aluBranch: std_logic;
+signal rType : std_logic; --signifies whether it is add/subtract (1) or load (0)
+signal immExtend : std_logic_vector(7 downto 0); --immedate 0 or 1 padded
+signal clk_signal, clk_signal2, clk_signal3 : std_logic;
+
 --signal ws_signal : std_logic_vector (1 downto 0) := "00";
 begin  
-    regFile : registerFile port map(rs1 => I(5 downto 4), rs2 => I(3 downto 2), clk => clk_signal, ws => ws_signal, wd=>regWrite, we => we_signal,rd1 =>regOut1, rd2 =>regOut2  );
-    alu1: alu port map(A => regOut1, B => regOut2, opField => I(7 downto 6), O => aluOutput, EQ => branch);
+    regFile : registerFile port map(rs1 => regFileInputA, rs2 => regFileInputB, clk => clk_signal3, ws => regDest, wd=>regWrite, we => writeEnable,rd1 =>regFileOutputA, rd2 =>regFileOutputB  );
+    alu1: alu port map(A => aluInputA, B => aluInputB, opField => aluOpField, O => aluOutput, EQ => aluBranch);
+
+    with I(7 downto 6) select 
+        rType <= '0' when "01", --load is i type
+                 '0' when "10", --print i guess
+                 '1' when others;
+    
+    with rType select
+        regDest <= I(1 downto 0) when '1', --add/sub has regDest at last 2 bits
+                   I(5 downto 4) when others; --load is at 2 bits 2 to the left 
+    
+    regFileInputA <= I(5 downto 4);
+
+    with rType select
+        regFileInputB <= I(3 downto 2) when '1', --add/sub format
+                         I(5 downto 4) when others; --just to have an expected return value, the registerFile will select rd as its A and B input on load
+
+    with rType select
+        regWrite <= aluOutput when '1', --add/sub gets regWrite from alu
+                    immExtend when others;
+    
+    with I(3) select
+        immExtend <= "0000" & I(3 downto 0) when '0',
+                     "1111" & I(3 downto 0) when others;
+
+    aluOpField <= I(7 downto 6);
+
+    aluInputA <= regFileOutputA;
+    aluInputB <= regFileOutputB;
+
+    with I(7 downto 6) select --right now ignores clock
+        writeEnable <= '1' when "00",
+                       '1' when "11",
+                       '1' when "01",
+                       '0' when others;
+    
+    
+
+
 
 
 
     process(clk)
     begin
-        if(clk = '1' and clk'event) then
-            if(I(7 downto 6) = "01") then --load
-                we_signal <= '1';
-                ws_signal <= I(5 downto 4);
-                if(I(3) = '1') then
-                    regWrite <= "1111" & I(3 downto 0);
-                else
-                    regWrite <= "0000" & I(3 downto 0);
-                end if;
-            end if;
-            if(I(7 downto 6) = "00" or I(7 downto 6) = "11") then --add/sub
-                we_signal <= '1';
-                ws_signal <= I(1 downto 0);
-                regWrite <= aluOutput;
-            end if;
-        end if;
         clk_signal <= clk;
     end process;
 
     process(clk_signal)
     begin
+        clk_signal2 <= clk_signal;
+    end process;
+
+    process(clk_signal2)
+    begin
+        clk_signal3 <= clk_signal2;
         report "regWrite: " & integer'image(to_integer(signed(RegWrite))); 
     end process;
-    
 
 
 end architecture behavioral;
