@@ -3,10 +3,10 @@ use ieee.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity alu is
-port(	A:	in std_logic_vector (7 downto 0);
-        B:	in std_logic_vector (7 downto 0);
+port(	A:	in std_logic_vector (7 downto 0):= "00000000";
+        B:	in std_logic_vector (7 downto 0):= "00000000";
 		opField: in std_logic_vector (1 downto 0); --This corresponds to the opfield in the 8-bit ISA instruction
-		O:	out std_logic_vector(7 downto 0);
+		O:	out std_logic_vector(7 downto 0) := "00000000";
         EQ: out std_logic
 );
 end alu;
