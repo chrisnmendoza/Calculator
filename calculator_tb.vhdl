@@ -30,7 +30,7 @@ end record;
 type pattern_array is array (natural range <>) of pattern_type; --let clock period = 4ns
 constant patterns : pattern_array := -- Order goes: Input address rs1,rs2,ws ; input data rd1,rd2,wd ; we clk
 (
-("01000101", '0'), --nothing happens on falling edge
+("01000011", '1'), --set r1 to 0011
 ("01000010", '0'),
 ("01000010", '1'), --set r1 to 0010
 ("01000111", '1'), --can't edit registers on falling edge

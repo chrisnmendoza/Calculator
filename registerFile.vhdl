@@ -32,13 +32,14 @@ signal o2: std_logic_vector(7 downto 0) := "00000000";
 signal o3: std_logic_vector(7 downto 0) := "00000000";
 signal o4: std_logic_vector(7 downto 0) := "00000000";
 signal weAndws : std_logic_vector(2 downto 0);
+signal clk_sig1, clk_sig2, clk_sig3 : std_logic;
 begin
 
 --  Component instantiation.
-reg_1: reg port map ( I => i1, clk => clk, O => o1); --left 4 bits
-reg_2: reg port map ( I => i2, clk => clk, O => o2); --right 4 bits
-reg_3: reg port map ( I => i3, clk => clk, O => o3); --right 4 bits
-reg_4: reg port map ( I => i4, clk => clk, O => o4); --right 4 bits
+reg_1: reg port map ( I => i1, clk => clk_sig3, O => o1); --left 4 bits
+reg_2: reg port map ( I => i2, clk => clk_sig3, O => o2); --right 4 bits
+reg_3: reg port map ( I => i3, clk => clk_sig3, O => o3); --right 4 bits
+reg_4: reg port map ( I => i4, clk => clk_sig3, O => o4); --right 4 bits
 
 weAndws <= we & ws;
 
@@ -69,6 +70,21 @@ with rs2 select --combinational read of rs2
            o2 when "01",
            o3 when "10",
            o4 when others;
+
+process(clk)
+begin
+    clk_sig1 <= clk;
+end process;
+
+process(clk_sig1)
+begin
+    clk_sig2 <= clk_sig1;
+end process;
+
+process(clk_sig2)
+begin
+    clk_sig3 <= clk_sig2;
+end process;
 
 end behav;
 

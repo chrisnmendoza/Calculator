@@ -50,10 +50,11 @@ signal aluBranch: std_logic;
 signal rType : std_logic; --signifies whether it is add/subtract (1) or load (0)
 signal immExtend : std_logic_vector(7 downto 0); --immedate 0 or 1 padded
 signal opCodeAndClk: std_logic_vector(2 downto 0);
+signal clk_sig1, clk_sig2, clk_sig3, clk_sig4, clk_sig5, clk_sig6, clk_sig7, clk_sig8, clk_sig9 : std_logic := '0';
 
 --signal ws_signal : std_logic_vector (1 downto 0) := "00";
 begin  
-    regFile : registerFile port map(rs1 => regFileInputA, rs2 => regFileInputB, clk => clk, ws => regDest, wd=>regWrite, we => writeEnable,rd1 =>regFileOutputA, rd2 =>regFileOutputB  );
+    regFile : registerFile port map(rs1 => regFileInputA, rs2 => regFileInputB, clk => clk_sig9, ws => regDest, wd=>regWrite, we => writeEnable,rd1 =>regFileOutputA, rd2 =>regFileOutputB  );
     alu1: alu port map(A => aluInputA, B => aluInputB, opField => aluOpField, O => aluOutput, EQ => aluBranch);
 
     with I(7 downto 6) select 
@@ -91,12 +92,54 @@ begin
                        '0' when others;
     
     opCodeAndClk <= I(7 downto 6) & clk;
-    
+
+
     process(clk)
     begin
-        if(clk = '1') then
+        clk_sig1 <= clk;
+    end process;
+
+    process(clk_sig1)
+    begin
+        clk_sig2 <= clk_sig1;
+    end process;
+
+    process(clk_sig2)
+    begin
+        clk_sig3 <= clk_sig2;
+    end process;
+
+    process(clk_sig3)
+    begin
+        clk_sig4 <= clk_sig3;
+    end process;
+
+    process(clk_sig4)
+    begin
+        clk_sig5 <= clk_sig4;
+    end process;
+
+    process(clk_sig5)
+    begin
+        clk_sig6 <= clk_sig5;
+    end process;
+
+    process(clk_sig6)
+    begin
+        clk_sig7 <= clk_sig6;
+    end process;
+
+    process(clk_sig7)
+    begin
+        clk_sig8 <= clk_sig7;
+    end process;
+
+    process(clk_sig8)
+    begin
+        if(clk_sig8 = '1' and clk_sig8'event) then
             report "regWrite: " & integer'image(to_integer(signed(RegWrite))); 
         end if;
+        clk_sig9 <= clk_sig8;
     end process;
 
 end architecture behavioral;
