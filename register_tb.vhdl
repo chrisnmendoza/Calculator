@@ -28,10 +28,20 @@ i, o: std_logic_vector (7 downto 0);
 clk: std_logic;
 end record;
 --  The patterns to apply.
-type pattern_array is array (natural range <>) of pattern_type;
+type pattern_array is array (natural range <>) of pattern_type; --let clock have period 4 ns
 constant patterns : pattern_array := -- Order goes: Upper, Lower, Output, Overflow, Underflow, Select
-(("00000000", "00000000", '0'), --test both initialized to 0
-("00000001", "00000001", '1')); --both get 1
+(("00000000", "00000000", '0'), --both initialized to 0
+("01010101", "00000000", '0'), --doesn't change until rising edge
+("01010101", "01010101", '1'), --changes now
+("11111111", "01010101", '1'), --doesn't change (rising edge passed)
+("00000000", "01010101", '0'), 
+("00000000", "01010101", '0'),
+("00000000", "00000000", '1'), --reset to 00000000
+("00000000", "00000000", '1'),
+("00000000", "00000000", '0'),
+("00000000", "00000000", '0'),
+("00000001", "00000001", '1'),--both get 1
+("00000001", "00000001", '1')); 
 begin
 --  Check each pattern.
 for n in patterns'range loop

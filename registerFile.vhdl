@@ -31,34 +31,32 @@ signal o1: std_logic_vector(7 downto 0) := "00000000";
 signal o2: std_logic_vector(7 downto 0) := "00000000";
 signal o3: std_logic_vector(7 downto 0) := "00000000";
 signal o4: std_logic_vector(7 downto 0) := "00000000";
-signal clockSig: std_logic;
+signal weAndws : std_logic_vector(2 downto 0);
 begin
 
 --  Component instantiation.
-reg_1: reg port map ( I => i1, clk => clockSig, O => o1); --left 4 bits
-reg_2: reg port map ( I => i2, clk => clockSig, O => o2); --right 4 bits
-reg_3: reg port map ( I => i3, clk => clockSig, O => o3); --right 4 bits
-reg_4: reg port map ( I => i4, clk => clockSig, O => o4); --right 4 bits
+reg_1: reg port map ( I => i1, clk => clk, O => o1); --left 4 bits
+reg_2: reg port map ( I => i2, clk => clk, O => o2); --right 4 bits
+reg_3: reg port map ( I => i3, clk => clk, O => o3); --right 4 bits
+reg_4: reg port map ( I => i4, clk => clk, O => o4); --right 4 bits
 
-process(clk) is
-begin
-    if(clk='1' and clk'event) then
-        if(we='1') then
-            if(ws="00") then --set i2 to wd
-                i1 <= wd;
-            elsif(ws="01") then --set i2 to wd
-               i2 <= wd;
-            elsif(ws="10") then --set i3 to wd
-                i3 <= wd;
-            else --set i4 to wd
-                i4 <= wd;
-            end if;
-        end if;
+weAndws <= we & ws;
 
-    end if;
-    clockSig <= clk;
+with weAndws select
+    i1 <=   wd when "100",
+            o1 when others;
 
-end process;
+with weAndws select
+i2 <=   wd when "101",
+        o2 when others;     
+
+with weAndws select
+i3 <=   wd when "110",
+        o3 when others;
+
+with weAndws select
+i4 <=   wd when "111",
+    o4 when others;  
 
 with rs1 select --combinational read of rs1
     rd1 <= o1 when "00",

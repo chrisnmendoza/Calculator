@@ -27,22 +27,33 @@ i: std_logic_vector(7 downto 0);
 clock: std_logic;
 end record;
 --  The patterns to apply.
-type pattern_array is array (natural range <>) of pattern_type;
+type pattern_array is array (natural range <>) of pattern_type; --let clock period = 4ns
 constant patterns : pattern_array := -- Order goes: Input address rs1,rs2,ws ; input data rd1,rd2,wd ; we clk
-(("00000000", '1'), --add r1 and r1 to r1 (0000 + 0000 = 0000)
-("00000000", '0'),
+(
+("01000101", '0'), --nothing happens on falling edge
+("01000010", '0'),
 ("01000010", '1'), --set r1 to 0010
+("01000111", '1'), --can't edit registers on falling edge
 ("01000111", '0'),
-("00000000", '1'), --add r1 and r1 to r1 (0010 + 0010 = 0100)
 ("00000000", '0'),
+("00000000", '1'), --add r1 and r1 to r1 (0010 + 0010 = 0100)
+("01011010", '1'), --instruction at non-rising edge will be buffered to next clock cycle (if instruction is held)
+("01011010", '0'),
+("01011010", '0'),
 ("01011010", '1'), --set r2 to 1010
-("01001000", '0'),
+("01000111", '1'),
+("00000000", '0'), --rapid changes when clock = 0 has no effect
+("01100001", '0'),
 ("01100001", '1'), --set r3 to 0001
-("01000011", '0'),
+("01100001", '1'),
+("00001001", '0'), 
+("00001001", '0'),
 ("00001001", '1'), --add r1 and r3 and put it in r2 (0100 + 0001 = 0101)
+("01000011", '1'),
 ("01000011", '0'),
-("01110101", '1'), --set r4 to 0101
-("01101011", '0')); --clock enable = 0, won't write to register
+("01110111", '0'),
+("01110111", '1'), --set r4 to 0111
+("01101011", '1')); 
 begin
 --  Check each pattern.
 for n in patterns'range loop

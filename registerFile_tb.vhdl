@@ -35,17 +35,21 @@ rd1, rd2, wd : std_logic_vector(7 downto 0);
 we, clk : std_logic;
 end record;
 --  The patterns to apply.
-type pattern_array is array (natural range <>) of pattern_type;
-constant patterns : pattern_array := -- Order goes: Input address rs1,rs2,ws ; input data rd1,rd2,wd ; we clk
-(("00", "01", "00", "00000000","00000000","11111111",'1', '0'), --test nothing happens on clock falling edge
-("00", "01", "00", "00000001","00000000","00000001",'1', '1'), --ws selects register1 and writes 00000001 to it
-("00", "01", "00", "00000001","00000000","00000001",'0', '0'), --test nothing happens on clock falling edge
-("00", "01", "00", "00000001","00000000","11111111",'0', '1'), --clock enable = 0, won't write to register
-("00", "01", "00", "00000001","00000000","00000000",'0', '0'), --test nothing happens on clock falling edge
-("10", "00", "10", "11111111","00000001","11111111",'1', '1'), --change what registers are at rs1 and rs2 and simultaneously change what's at rs1
-("00", "01", "00", "00000001","00000000","00000000",'0', '0'), --test nothing happens on clock falling edge HOWEVER YOU ARE ABLE TO CHANGE WHAT RD AND RS IS
-("00", "01", "00", "00001001","00000000","00001001",'1', '1'), --ws selects register1 and writes 00000001 to it
-("00", "01", "00", "00001001","00000000","00001001",'0', '1')); --clock enable = 0, won't write to register
+type pattern_array is array (natural range <>) of pattern_type; --let clock have period 4ns
+constant patterns : pattern_array := -- Order goes: rs1, rs2, ws ; input data rd1,rd2,wd ; we clk
+(("11", "01", "11", "00000000","00000000","00000000",'1', '0'), --test nothing happens on clock falling edge
+("11", "01", "01", "00000000","00000000","11111111",'1', '0'),
+("11", "01", "01", "00000000","11111111","11111111",'1', '1'), --write "11111111" to reg 01
+("11", "01", "01", "00000000","11111111","11111111",'1', '1'),
+("11", "10", "00", "00000000","00000000","11111111",'1', '0'), --can't write on falling edge but can change what registers being streamed
+("11", "10", "10", "00000000","00000000","10101010",'0', '0'),
+("11", "10", "10", "00000000","00000000","10101010",'0', '1'), --can't write when write enable = 0
+("11", "10", "10", "00000000","00000000","10101010",'1', '1'), --can't write when not rising edge
+("11", "10", "10", "00000000","00000000","11111111",'1', '0'), 
+("01", "00", "00", "11111111","00000000","01010101",'1', '0'), --can't write on falling edge but can change what registers being streamed
+("01", "00", "00", "11111111","01010101","01010101",'1', '1'), --write to 00 "01010101"
+("01", "00", "00", "11111111","01010101","11111111",'1', '1') --can't write when not rising edge
+); --clock enable = 0, won't write to register
 begin
 --  Check each pattern.
 for n in patterns'range loop
