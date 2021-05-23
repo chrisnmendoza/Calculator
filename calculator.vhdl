@@ -8,7 +8,7 @@ use IEEE.numeric_std.all;
 --We can make nothing get transmitted to registerFile by making a second signal
 --for the inputs of registerFile and muxing that with itself and the updated instructions
 --the select is a skip_signal which gets determined by the alu EQ output
-
+--Print statement: opcode == 10, rs == what's getting printed, rt == not used, rd MUST EQUAL 3, OR ELSE IT'S A BEQ
 
 entity calculator is 
     port( --opcode key: ADD = 00, SUB = 11, LOAD = 01, CMP/PRINT = 10
@@ -59,6 +59,8 @@ signal rType : std_logic; --signifies whether it is add/subtract (1) or load (0)
 signal immExtend : std_logic_vector(7 downto 0); --immedate 0 or 1 padded
 signal opCodeAndClk: std_logic_vector(2 downto 0);
 signal clk_sig1, clk_sig2, clk_sig3, clk_sig4, clk_sig5, clk_sig6, clk_sig7, clk_sig8, clk_sig9 : std_logic := '0';
+signal printing : std_logic := '0';
+signal rTypeAndPrinting : std_logic_vector(1 downto 0);
 
 --signal ws_signal : std_logic_vector (1 downto 0) := "00";
 begin  
@@ -80,9 +82,14 @@ begin
         regFileInputB <= I(3 downto 2) when '1', --add/sub format
                          I(5 downto 4) when others; --just to have an expected return value, the registerFile will select rd as its A and B input on load
 
-    with rType select
-        regWrite <= aluOutput when '1', --add/sub gets regWrite from alu
-                    immExtend when others;
+    printing <= aluBranch;
+
+    rTypeAndPrinting <= rType & printing;
+    
+    with rTypeAndPrinting select
+        regWrite <= aluOutput when "10", --add/sub gets regWrite from alu
+                    immExtend when "00", --load gets regWrite from immediate field
+                    regFileOutputA when others; --DO NOT CHANGE regWrite WHEN PRINTING = 1
     
     with I(3) select
         immExtend <= "0000" & I(3 downto 0) when '0',
