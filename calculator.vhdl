@@ -2,6 +2,14 @@ library ieee;
 use ieee.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
+--Things to add:
+--Print command (10 same as beq) only time something gets displayed
+--beq simply makes nothing get transmitted to registerFile, and nothing gets printed either
+--We can make nothing get transmitted to registerFile by making a second signal
+--for the inputs of registerFile and muxing that with itself and the updated instructions
+--the select is a skip_signal which gets determined by the alu EQ output
+
+
 entity calculator is 
     port( --opcode key: ADD = 00, SUB = 11, LOAD = 01, CMP/PRINT = 10
         I: in std_logic_vector(7 downto 0) := "00000000"; --format is: opcode (7 downto 6), rs (5 downto 4), rt (3 downto 2), rd (1 downto 0) for rType, 
