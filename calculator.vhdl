@@ -59,7 +59,7 @@ signal rType : std_logic; --signifies whether it is add/subtract (1) or load (0)
 signal immExtend : std_logic_vector(7 downto 0); --immedate 0 or 1 padded
 signal opCodeAndClk: std_logic_vector(2 downto 0);
 signal clk_sig1, clk_sig2, clk_sig3, clk_sig4, clk_sig5, clk_sig6, clk_sig7, clk_sig8, clk_sig9 : std_logic := '0';
-signal printing : std_logic := '0';
+signal printOrBranch, printing : std_logic := '0';
 signal rTypeAndPrinting : std_logic_vector(1 downto 0);
 
 --signal ws_signal : std_logic_vector (1 downto 0) := "00";
@@ -82,7 +82,13 @@ begin
         regFileInputB <= I(3 downto 2) when '1', --add/sub format
                          I(5 downto 4) when others; --just to have an expected return value, the registerFile will select rd as its A and B input on load
 
-    printing <= aluBranch;
+    with I(7 downto 6) select
+        printOrBranch <= '1' when "10",
+                         '0' when others;
+    
+    with I(1 downto 0) select
+        printing <= printOrBranch when "11",
+                    '0' when others;
 
     rTypeAndPrinting <= rType & printing;
     
@@ -111,6 +117,9 @@ begin
 
     process(clk)
     begin
+        if(clk = '1' and clk'event and printing = '1') then
+            report integer'image(to_integer(signed(RegWrite))); 
+        end if;
         clk_sig1 <= clk;
     end process;
 
@@ -152,7 +161,7 @@ begin
     process(clk_sig8)
     begin
         if(clk_sig8 = '1' and clk_sig8'event) then
-            report "regWrite: " & integer'image(to_integer(signed(RegWrite))); 
+            --report "regWrite: " & integer'image(to_integer(signed(RegWrite))); --debugging for regWrite
         end if;
         clk_sig9 <= clk_sig8;
     end process;
