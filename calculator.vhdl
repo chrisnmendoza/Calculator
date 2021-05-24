@@ -80,7 +80,7 @@ begin
 
     beqRegisterFile : registerFile port map(rs1 => "00", rs2 => "01", clk => clk_sig5, ws => "00", wd=>beqRegisterWrite, we => '1',rd1 =>beqRegisterOutputA, rd2 =>beqRegisterOutputB  );
 
-    --mux between 0 and eq value, select is I(1 downto 0)
+    --mux between 0 and alu eq value, select is I(1 downto 0)
     with I(1 downto 0) select
         aluBranchConfirm <= aluBranchOutput when "01",
                             aluBranchOutput when "10",
