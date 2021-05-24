@@ -118,7 +118,7 @@ begin
 
     with rType select
         regFileInputB <= IBuffer(3 downto 2) when '1', --add/sub format
-                         IBuffer(5 downto 4) when others; --just to have an expected return value, the registerFile will select rd as its A and B input on load
+                         IBuffer(3 downto 2) when others;
 
     with IBuffer(7 downto 6) select
         printOrBranch <= '1' when "10",
