@@ -3,11 +3,7 @@ use ieee.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 --Things to add:
---Print command (10 same as beq) only time something gets displayed
---beq simply makes nothing get transmitted to registerFile, and nothing gets printed either
---We can make nothing get transmitted to registerFile by making a second signal
---for the inputs of registerFile and muxing that with itself and the updated instructions
---the select is a skip_signal which gets determined by the alu EQ output
+--make a vhdl file for the control
 --Print statement: opcode == 10, rs == what's getting printed, rt == not used, rd MUST EQUAL 3, OR ELSE IT'S A BEQ
 
 entity calculator is 
