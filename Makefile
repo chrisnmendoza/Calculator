@@ -22,3 +22,9 @@ calculator: calculator.vhdl calculator_tb.vhdl
 	ghdl -a calculator_tb.vhdl
 	ghdl -e calculator_tb
 	ghdl -r calculator_tb
+
+calculator_controller: calculator_controller.vhdl calculator_controller_tb.vhdl
+	ghdl -a calculator_controller.vhdl
+	ghdl -a calculator_controller_tb.vhdl
+	ghdl -e calculator_controller_tb
+	ghdl -r calculator_controller_tb
