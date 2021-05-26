@@ -23,6 +23,8 @@ calculator1 : calculator port map(I => I, clk => clock);
 --  This process does the real job.
 --The instructionFile located at instructions.txt contains the instructions:
 --01000010   set reg1 to 2
+--10000001   skip 1 line if reg1 == reg1 (true) (2 == 2)
+--01000111   set reg1 to 7
 --00000000   set reg1 to reg1 + reg1 (2 + 2 = 4)
 --01110100   set reg4 to 4
 --10000111   print reg1 (4)
