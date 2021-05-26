@@ -24,7 +24,7 @@ component calculator_controller is
         opCode, imm: in std_logic_vector(1 downto 0);
         equals: in std_logic;
         beqOutput: in std_logic_vector(7 downto 0);
-        rType, printing, branchConfirm, writeEnable, noSkipPrint: out std_logic;
+        rType, printing, branchConfirm, writeEnable, noSkipPrint, clkSkip: out std_logic;
         regWriteSelector: out std_logic_vector (1 downto 0)
     );
 end component;
@@ -69,6 +69,7 @@ signal beqRegisterInputA, beqRegisterInputB, beqRegisterSelect : std_logic_vecto
 signal beqRegisterOutputA, beqRegisterOutputB, beqRegisterWrite, beqRegisterDecremented : std_logic_vector(7 downto 0);
 signal branchCounter : std_logic_vector(1 downto 0) := "00";
 signal IBuffer : std_logic_vector(7 downto 0);
+signal clkSkip : std_logic;
 
 
 --signal ws_signal : std_logic_vector (1 downto 0) := "00";
@@ -96,7 +97,7 @@ begin
 
     regFile : registerFile port map(rs1 => IBuffer(5 downto 4), rs2 => IBuffer(3 downto 2), clk => clk_sig9, ws => regDest, wd=>regWrite, we => writeEnable,rd1 =>regFileOutputA, rd2 =>regFileOutputB  );
     alu1: alu port map(A => regFileOutputA, B => regFileOutputB, opField => IBuffer(7 downto 6), O => aluOutput, EQ => aluBranchOutput);
-    controller: calculator_controller port map(opCode => I(7 downto 6), imm => I(1 downto 0), beqOutput => beqRegisterOutputA, equals => aluBranchOutput, rType => rType, printing => printing, branchConfirm => aluBranchConfirm, writeEnable => writeEnable, noSkipPrint => printEnable, regWriteSelector => regWriteSelector);
+    controller: calculator_controller port map(opCode => I(7 downto 6), imm => I(1 downto 0), beqOutput => beqRegisterOutputA, equals => aluBranchOutput, rType => rType, printing => printing, branchConfirm => aluBranchConfirm, writeEnable => writeEnable, noSkipPrint => printEnable, clkSkip => clkSkip, regWriteSelector => regWriteSelector);
     printer1: printer port map(I => regWrite, en => printEnable, clk => clk);
 
     --controller changes the register being written to
@@ -130,7 +131,7 @@ begin
 
     process(clk_sig7)
     begin
-        if(beqRegisterOutputA(1 downto 0) = "00") then --if there are still lines left to skip, don't update the clock
+        if(clkSkip = '0') then --controller determines whether or not registerFile gets input
             clk_sig8 <= clk_sig7;
         end if;
     end process;
