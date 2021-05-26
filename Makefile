@@ -28,3 +28,9 @@ calculator_controller: calculator_controller.vhdl calculator_controller_tb.vhdl
 	ghdl -a calculator_controller_tb.vhdl
 	ghdl -e calculator_controller_tb
 	ghdl -r calculator_controller_tb
+
+printer: printer.vhdl printer_tb.vhdl
+	ghdl -a printer.vhdl
+	ghdl -a printer_tb.vhdl
+	ghdl -e printer_tb
+	ghdl -r printer_tb

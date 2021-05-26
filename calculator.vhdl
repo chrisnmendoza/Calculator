@@ -19,20 +19,14 @@ component alu is  --this is the alu need to add 1 because vhdl name
 );
 end component alu;
 
-component reg is
-    port(	I:	in std_logic_vector (7 downto 0) := "00000000";
-            clk:	in std_logic;
-            O:	out std_logic_vector(7 downto 0) := "00000000"
-    );
-end component reg;
-
 component calculator_controller is
     port( --opcode key: calculator controller relies on opfield and alu eq output of main alu
         opCode, imm: in std_logic_vector(1 downto 0);
         equals: in std_logic;
-        rType, printing, branchConfirm, writeEnable: out std_logic;
+        beqOutput: in std_logic_vector(7 downto 0);
+        rType, printing, branchConfirm, writeEnable, noSkipPrint: out std_logic;
         regWriteSelector: out std_logic_vector (1 downto 0)
-        );
+    );
 end component;
 
 component registerFile is
@@ -47,6 +41,12 @@ component registerFile is
 );
 end component registerFile;
 
+component printer
+port(	I: in std_logic_vector(7 downto 0);
+        en: in std_logic;
+        clk: in std_logic
+);
+end component;
 
 signal regFileInputA, regFileInputB, regDest: std_logic_vector(1 downto 0);
 signal regWrite : std_logic_vector(7 downto 0);
@@ -62,12 +62,14 @@ signal opCodeAndClk: std_logic_vector(2 downto 0);
 signal clk_sig1, clk_sig2, clk_sig3, clk_sig4, clk_sig5, clk_sig6, clk_sig7, clk_sig8, clk_sig9 : std_logic := '0';
 signal printOrBranch, printing : std_logic := '0';
 signal regWriteSelector : std_logic_vector(1 downto 0);
+signal printEnable : std_logic;
 
 --beq signals
 signal beqRegisterInputA, beqRegisterInputB, beqRegisterSelect : std_logic_vector (1 downto 0);
 signal beqRegisterOutputA, beqRegisterOutputB, beqRegisterWrite, beqRegisterDecremented : std_logic_vector(7 downto 0);
 signal branchCounter : std_logic_vector(1 downto 0) := "00";
 signal IBuffer : std_logic_vector(7 downto 0);
+
 
 --signal ws_signal : std_logic_vector (1 downto 0) := "00";
 begin  
@@ -94,7 +96,8 @@ begin
 
     regFile : registerFile port map(rs1 => IBuffer(5 downto 4), rs2 => IBuffer(3 downto 2), clk => clk_sig9, ws => regDest, wd=>regWrite, we => writeEnable,rd1 =>regFileOutputA, rd2 =>regFileOutputB  );
     alu1: alu port map(A => regFileOutputA, B => regFileOutputB, opField => IBuffer(7 downto 6), O => aluOutput, EQ => aluBranchOutput);
-    controller: calculator_controller port map(opCode => I(7 downto 6), imm => I(1 downto 0), equals => aluBranchOutput, rType => rType, printing => printing, branchConfirm => aluBranchConfirm, writeEnable => writeEnable, regWriteSelector => regWriteSelector);
+    controller: calculator_controller port map(opCode => I(7 downto 6), imm => I(1 downto 0), beqOutput => beqRegisterOutputA, equals => aluBranchOutput, rType => rType, printing => printing, branchConfirm => aluBranchConfirm, writeEnable => writeEnable, noSkipPrint => printEnable, regWriteSelector => regWriteSelector);
+    printer1: printer port map(I => regWrite, en => printEnable, clk => clk);
 
     --controller changes the register being written to
     with rType select
@@ -114,11 +117,6 @@ begin
 
     process(clk)
     begin
-        if(clk = '1' and clk'event and printing = '1') then --print
-            if(beqRegisterOutputA(1 downto 0) = "00") then --if there are still lines left to skip, don't print
-                report integer'image(to_integer(signed(RegWrite))); 
-            end if;
-        end if;
         clk_sig1 <= clk;
     end process;
 
@@ -139,9 +137,6 @@ begin
 
     process(clk_sig8)
     begin
-        if(clk_sig8 = '1' and clk_sig8'event) then
-            --report "regWrite: " & integer'image(to_integer(signed(RegWrite))); --debugging for regWrite
-        end if;
         clk_sig9 <= clk_sig8;
     end process;
 
