@@ -1,37 +1,37 @@
 v 4
-file . "printer_tb.vhdl" "8a4fa1564ccfee88f9a67618bd0f1827c4ea3f60" "20210527133121.849":
-  entity printer_tb at 1( 0) + 0 on 3183;
-  architecture behav of printer_tb at 8( 119) + 0 on 3184;
-file . "printer.vhdl" "abdcb81076165c7623a5a5ddc85641493e09d2ea" "20210527133121.652":
-  entity printer at 1( 0) + 0 on 3181;
-  architecture behav of printer at 14( 214) + 0 on 3182;
-file . "calculator_controller.vhdl" "72b433a86800e843f42a98257776bda3c3bcf9d9" "20210526155221.761":
-  entity calculator_controller at 1( 0) + 0 on 3137;
-  architecture behavioral of calculator_controller at 15( 525) + 0 on 3138;
-file . "calculator_tb.vhdl" "c9d04832dbfd5c6956bb28832de7f2edb4633f74" "20210527133138.166":
-  entity calculator_tb at 1( 0) + 0 on 3187;
-  architecture behav of calculator_tb at 9( 146) + 0 on 3188;
-file . "calculator.vhdl" "58927b8e959626c2a19b806c50204397c4b6309c" "20210527133137.912":
-  entity calculator at 1( 0) + 0 on 3185;
-  architecture behavioral of calculator at 12( 481) + 0 on 3186;
-file . "register.vhdl" "ff68d8800e97015df02294b603e1314a4886f14f" "20210526223330.433":
-  entity reg at 1( 0) + 0 on 3155;
-  architecture behav of reg at 11( 211) + 0 on 3156;
-file . "alu.vhdl" "f663be4998c5928784bc2ba5b186a80da9d05704" "20210526155219.034":
-  entity alu at 1( 0) + 0 on 3133;
-  architecture behav of alu at 14( 411) + 0 on 3134;
-file . "alu_tb.vhdl" "cbb55747345441d92f8103d5948d80c6deb5719a" "20210526155219.051":
-  entity alu_tb at 1( 0) + 0 on 3135;
-  architecture behav of alu_tb at 8( 111) + 0 on 3136;
-file . "registerFile.vhdl" "b1ddad22a113054de050b7759c1c9ec75b3438d7" "20210526223330.521":
-  entity registerfile at 1( 0) + 0 on 3157;
-  architecture behav of registerfile at 17( 819) + 0 on 3158;
-file . "registerFile_tb.vhdl" "1cd534160148d68a6555d682f845a96f51250258" "20210526223330.607":
-  entity registerfile_tb at 1( 0) + 0 on 3159;
-  architecture behav of registerfile_tb at 8( 129) + 0 on 3160;
-file . "register_tb.vhdl" "ff599a87812426c6984dc8a58fc6fa5b421cb708" "20210526155216.297":
-  entity reg_tb at 1( 0) + 0 on 3125;
-  architecture behav of reg_tb at 8( 111) + 0 on 3126;
-file . "calculator_controller_tb.vhdl" "e11548f26d16307eec25a68183b7a521c0676618" "20210526155221.778":
-  entity calculator_controller_tb at 1( 0) + 0 on 3139;
-  architecture behav of calculator_controller_tb at 8( 140) + 0 on 3140;
+file . "calculator_controller_tb.vhdl" "1dad8b75d5e5ce000f08470875abfd2850ce2655" "20210527232344.399":
+  entity calculator_controller_tb at 1( 0) + 0 on 3213;
+  architecture behav of calculator_controller_tb at 8( 147) + 0 on 3214;
+file . "register_tb.vhdl" "ff599a87812426c6984dc8a58fc6fa5b421cb708" "20210527232333.634":
+  entity reg_tb at 1( 0) + 0 on 3199;
+  architecture behav of reg_tb at 8( 111) + 0 on 3200;
+file . "registerFile_tb.vhdl" "1cd534160148d68a6555d682f845a96f51250258" "20210527232336.346":
+  entity registerfile_tb at 1( 0) + 0 on 3205;
+  architecture behav of registerfile_tb at 8( 129) + 0 on 3206;
+file . "registerFile.vhdl" "b1ddad22a113054de050b7759c1c9ec75b3438d7" "20210527232336.187":
+  entity registerfile at 1( 0) + 0 on 3203;
+  architecture behav of registerfile at 17( 819) + 0 on 3204;
+file . "alu_tb.vhdl" "cbb55747345441d92f8103d5948d80c6deb5719a" "20210527232339.372":
+  entity alu_tb at 1( 0) + 0 on 3209;
+  architecture behav of alu_tb at 8( 111) + 0 on 3210;
+file . "alu.vhdl" "f663be4998c5928784bc2ba5b186a80da9d05704" "20210527232339.197":
+  entity alu at 1( 0) + 0 on 3207;
+  architecture behav of alu at 14( 411) + 0 on 3208;
+file . "register.vhdl" "ff68d8800e97015df02294b603e1314a4886f14f" "20210527232336.137":
+  entity reg at 1( 0) + 0 on 3201;
+  architecture behav of reg at 11( 211) + 0 on 3202;
+file . "calculator.vhdl" "58927b8e959626c2a19b806c50204397c4b6309c" "20210527232349.769":
+  entity calculator at 1( 0) + 0 on 3219;
+  architecture behavioral of calculator at 12( 481) + 0 on 3220;
+file . "calculator_tb.vhdl" "c9d04832dbfd5c6956bb28832de7f2edb4633f74" "20210527232349.894":
+  entity calculator_tb at 1( 0) + 0 on 3221;
+  architecture behav of calculator_tb at 9( 146) + 0 on 3222;
+file . "calculator_controller.vhdl" "8e993abf9ed09797bc3d5603783a3478fc832831" "20210527232344.324":
+  entity calculator_controller at 1( 0) + 0 on 3211;
+  architecture behavioral of calculator_controller at 15( 539) + 0 on 3212;
+file . "printer.vhdl" "abdcb81076165c7623a5a5ddc85641493e09d2ea" "20210527232346.355":
+  entity printer at 1( 0) + 0 on 3215;
+  architecture behav of printer at 14( 214) + 0 on 3216;
+file . "printer_tb.vhdl" "8a4fa1564ccfee88f9a67618bd0f1827c4ea3f60" "20210527232346.407":
+  entity printer_tb at 1( 0) + 0 on 3217;
+  architecture behav of printer_tb at 8( 119) + 0 on 3218;
