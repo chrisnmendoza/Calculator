@@ -14,25 +14,25 @@ end printer;
 architecture behav of printer is
 begin
     process(clk)
-    variable int_val : integer;
+    variable printVal : integer;
     begin
         if(clk'event and clk = '1' and en = '1') then
-        int_val := to_integer(signed(I));
-        if(int_val >= 0) then
-          if(int_val < 10) then
-            report "   " & integer'image(int_val) severity note;
-          elsif(int_val < 100) then
-            report "  " & integer'image(int_val) severity note;
+        printVal := to_integer(signed(I));
+        if(printVal >= 0) then
+          if(printVal < 10) then
+            report "   " & integer'image(printVal) severity note;
+          elsif(printVal < 100) then
+            report "  " & integer'image(printVal) severity note;
           else
-            report " " & integer'image(int_val) severity note;
+            report " " & integer'image(printVal) severity note;
           end if;
         else
-          if(int_val > -10) then
-            report "  " & integer'image(int_val) severity note;
-          elsif(int_val > -100) then
-            report " " & integer'image(int_val) severity note;
+          if(printVal > -10) then
+            report "  " & integer'image(printVal) severity note;
+          elsif(printVal > -100) then
+            report " " & integer'image(printVal) severity note;
           else
-            report integer'image(int_val) severity note;
+            report integer'image(printVal) severity note;
           end if;
         end if;
         end if;
