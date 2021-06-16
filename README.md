@@ -3,3 +3,5 @@ The calculator is comprised of several registerFiles, an ALU, a clock, a control
 as well as the printer module.
 You can find the diagram for the circuit under "lab4_diagram.pdf".
 The instructions inputted into the testbench are found under "instructions.txt".
+Please run "make calculator" to run the testbench.
+Note, this requires ghdl to run.
